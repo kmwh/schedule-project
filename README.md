@@ -1,16 +1,9 @@
 # Schedule Project API Documentation
 
----
-
-### Base URL
-http://localhost:8080/api/schedules
-
----
-
 ## API 목록
 
 ### 1. 일정 등록
-POST /api/schedules
+POST `/api/schedules`
 - 요청 바디
 {
   "todo": "스터디 준비",
