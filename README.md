@@ -6,7 +6,7 @@
 POST `/api/schedules`
 - 요청 바디
 `{
-  "todo": "스터디 준비",
+  "todo": "할 일",
   "password": "1234",
   "authorName": "홍길동",
   "authorEmail": "hong@example.com"
@@ -45,7 +45,7 @@ size: 페이지 크기 (기본값 20)`
   "content": [
     {
       "id": 1,
-      "todo": "할 일일",
+      "todo": "할 일",
       "authorName": "홍길동",
       "authorEmail": "hong@example.com",
       "createdAt": "2025-05-25T12:34:56",
