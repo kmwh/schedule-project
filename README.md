@@ -83,3 +83,5 @@ DELETE `/api/schedules/{id}`
 }`
 - 응답 예시
 `204 No Content`
+
+![ss](https://github.com/user-attachments/assets/7d07cfd1-960d-440e-a065-e23c4b48b9af)
