@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -17,17 +19,13 @@ public class Schedule extends BaseEntity {
     private Long id;
 
     @NotBlank
-    @Size(max = 200) // Lv6
+    @Size(max = 200)
     private String todo;
 
-    @NotBlank // Lv6
+    @NotBlank
     private String password;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
-
-    // Lv3 구현으로 주석
-//    @NotBlank
-//    private String authorName;
 }

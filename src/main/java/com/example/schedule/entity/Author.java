@@ -19,7 +19,8 @@ public class Author extends BaseEntity {
     @NotBlank
     private String name;
 
-    @Email // Lv3 + Lv6
+    @Email
     @NotBlank
     private String email;
 }
+

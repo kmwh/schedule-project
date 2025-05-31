@@ -6,55 +6,58 @@ import com.example.schedule.dto.ScheduleResponseDto;
 import com.example.schedule.dto.ScheduleUpdateRequestDto;
 import com.example.schedule.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/schedules")
 public class ScheduleController {
+
     private final ScheduleService scheduleService;
 
-    // Lv1 + Lv6
     @PostMapping
-    public ResponseEntity<ScheduleResponseDto> create(@Validated @RequestBody ScheduleRequestDto request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.create(request));
+    public ResponseEntity<ScheduleResponseDto> create(
+            @Validated @RequestBody ScheduleRequestDto request) {
+
+        ScheduleResponseDto response = scheduleService.create(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    // Lv1
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(scheduleService.findById(id));
     }
 
-    // Lv1 + Lv3(id로 찾는 기능 추가) + Lv4(페이지네이션 추가)
     @GetMapping
-    public ResponseEntity<Page<ScheduleResponseDto>> findAll(
+    public ResponseEntity<List<ScheduleResponseDto>> findAll(
             @RequestParam(required = false) String updatedAt,
-            //@RequestParam(required = false) String authorName,
             @RequestParam(required = false) Long authorId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-//        return ResponseEntity.ok(scheduleService.findAll(updatedAt, authorName, page, size));
-        return ResponseEntity.ok(scheduleService.findAll(updatedAt, authorId, page, size));
+
+        List<ScheduleResponseDto> responses =
+                scheduleService.findAll(updatedAt, authorId, page, size);
+        return ResponseEntity.ok(responses);
     }
 
-    // Lv2 + Lv6
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> update(
             @PathVariable Long id,
             @Validated @RequestBody ScheduleUpdateRequestDto request) {
+
         return ResponseEntity.ok(scheduleService.update(id, request));
     }
 
-    // Lv2
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
             @PathVariable Long id,
-            @RequestBody ScheduleDeleteRequestDto request) {
+            @Validated @RequestBody ScheduleDeleteRequestDto request) {
+
         scheduleService.delete(id, request.getPassword());
         return ResponseEntity.noContent().build();
     }

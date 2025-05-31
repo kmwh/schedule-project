@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Getter
 @Setter
-abstract class BaseEntity {
+public abstract class BaseEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -23,3 +23,4 @@ abstract class BaseEntity {
         updatedAt = LocalDateTime.now();
     }
 }
+

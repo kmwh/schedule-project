@@ -1,21 +1,24 @@
 package com.example.schedule.repository;
 
 import com.example.schedule.entity.Schedule;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
-public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
-    Page<Schedule> findByAuthor_Name(String name, Pageable pageable);
-    Page<Schedule> findByAuthor_NameAndUpdatedAtLessThan(String name,
-                                                         LocalDateTime updatedAt,
-                                                         Pageable pageable);
-    Page<Schedule> findByUpdatedAtLessThan(LocalDateTime updatedAt, Pageable pageable);
-    Page<Schedule> findByAuthor_IdAndUpdatedAtLessThanEqual(Long authorId, LocalDateTime updatedAt, Pageable pageable);
-    Page<Schedule> findByAuthor_Id(Long authorId, Pageable pageable);
-    Page<Schedule> findByUpdatedAtLessThanEqual(LocalDateTime updatedAt, Pageable pageable);
+public interface ScheduleRepository {
+    Schedule save(Schedule schedule);
+    Optional<Schedule> findById(Long id);
 
+    List<Schedule> findAll(int page, int size);
 
+    boolean delete(Long id);
+
+    List<Schedule> findByAuthorIdAndUpdatedAtLessThanEqual(
+            Long authorId, LocalDateTime updatedAt, int page, int size);
+
+    List<Schedule> findByAuthorId(Long authorId, int page, int size);
+
+    List<Schedule> findByUpdatedAtLessThanEqual(
+            LocalDateTime updatedAt, int page, int size);
 }
